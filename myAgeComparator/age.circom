@@ -1,20 +1,19 @@
-pragma circom 2.0.0;
+pragma circom 2.1.6;
 
-template CheckLessThan() {
+include "../node_modules/circomlib/circuits/comparators.circom";
+
+template Over21() {
+
     signal input age;
-    signal input threshold;
-    signal output c;
+    signal input ageLimit;
+    signal output oldEnough;
     
-    var d;
-
+    // 8 bits is plenty to store age
+    component gt = GreaterThan(8);
+    gt.in[0] <== age;
+    gt.in[1] <== ageLimit;
     
-    if (age < threshold){
-        d = 1;
-    } else {
-        d = 0;
-    }
+    oldEnough <== gt.out;
+}
 
-    c <== d;
- }
-
- component main {public [threshold]} = CheckLessThan();
+component main{public [ageLimit]} = Over21();

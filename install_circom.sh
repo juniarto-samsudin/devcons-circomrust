@@ -8,3 +8,4 @@ cargo install --path circom
 
 # install snarkjs
 npm install -g snarkjs
+npm install
